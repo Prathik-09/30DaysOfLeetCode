@@ -1,0 +1,50 @@
+✅ Java Code (Brute Force Approach)
+
+public class Solution {
+    public int countPairs(List<Integer> nums, int target) {
+        int count = 0;
+
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = i + 1; j < nums.size(); j++) {
+                if (nums.get(i) + nums.get(j) < target) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+📌 Time and Space Complexity
+Time Complexity: O(n²)
+Space Complexity: O(1)
+
+
+
+✅ Optimized Java Code (Two Pointers + Sorting)
+import java.util.Arrays;
+
+public class Solution {
+    public int countPairs(int[] nums, int target) {
+        Arrays.sort(nums);  // Sort the array first
+        int count = 0;
+        int left = 0, right = nums.length - 1;
+
+        while (left < right) {
+            if (nums[left] + nums[right] < target) {
+                // All elements between left and right will form valid pairs with nums[left]
+                count += right - left;
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return count;
+    }
+}
+
+📌 Time and Space Complexity
+Time Complexity: O(n log n) – due to sorting
+Space Complexity: O(1) – in-place sorting
